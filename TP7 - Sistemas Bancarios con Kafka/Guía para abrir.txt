@@ -1,0 +1,31 @@
+1) abrir docker desktop
+
+abrir carpeta del proyecto
+docker compose up -d
+
+comprobar si salen el zookeper y kafka
+docker ps
+
+2) levantar la api
+abrir terminal en carpeta de la api
+node src/api.js
+
+3) levantar el orchestrator
+abrir terminal en la carpeta del orchestrator 
+node src/orchestrator.js
+
+se debería ver el mensaje
+[ConsumerGroup] Consumer has joined the group
+
+4) Levantar el Gateway (WebSocket)
+abrir terminal en la carpeta de gateway
+node src/gateway.js
+
+5) Levantar el Frontend (Next.js)
+abrir terminal en la carpeta de frontend
+npm run dev
+
+http://localhost:3000
+
+para cerrarlo en la de compose:
+docker compose down
