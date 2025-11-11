@@ -1,0 +1,150 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === ANIMACIONES Y ESTILOS CUSTOM (IMPORTANTE para el look HUD) === */
+
+.bg-grid-pattern {
+  background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.scanlines {
+  background: linear-gradient(transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+  background-size: 100% 4px;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 10px; }
+}
+
+.noise-animation {
+  /* URL larga de SVG para ruido */
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhIikgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');
+  animation: noise 0.2s steps(10) infinite;
+}
+
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-2%, 2%); }
+  40% { transform: translate(2%, -1%); }
+  50% { transform: translate(-1%, 2%); }
+  60% { transform: translate(2%, 1%); }
+  70% { transform: translate(-2%, -1%); }
+  80% { transform: translate(1%, -2%); }
+  90% { transform: translate(-1%, 1%); }
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.5; }
+}
+.animate-flicker {
+    animation: flicker 4s linear infinite;
+}
+
+@keyframes borderPulse {
+    0% { opacity: 0.5; transform: scaleX(0); }
+    50% { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0.5; transform: scaleX(0); }
+}
+.animate-border-pulse {
+    animation: borderPulse 4s infinite cubic-bezier(0.5, 0, 0.5, 1);
+    transform-origin: left;
+}
+.animate-border-pulse-reverse {
+    animation: borderPulse 4s infinite cubic-bezier(0.5, 0, 0.5, 1);
+    transform-origin: right;
+}
+
+@keyframes pulseFast {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+.animate-pulse-fast {
+    animation: pulseFast 1.5s infinite ease-in-out;
+}
+
+@keyframes pingStrong {
+    0% { transform: scale(0.1); opacity: 0.8; }
+    80% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+.animate-ping-strong {
+    animation: pingStrong 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Estilo Glitch */
+.glitch {
+    position: relative;
+}
+.glitch:before,
+.glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s;
+}
+
+.glitch:hover:before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff; 
+    animation: glitch-anim-1 0.3s infinite linear alternate-reverse;
+}
+
+.glitch:hover:after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff; 
+    animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(24px, 350px, 3px, 0); }
+  50% { clip: rect(78px, 350px, 86px, 0); }
+  100% { clip: rect(31px, 350px, 11px, 0); }
+}
+@keyframes glitch-anim-2 {
+  0% { clip: rect(2px, 350px, 35px, 0); }
+  50% { clip: rect(44px, 350px, 57px, 0); }
+  100% { clip: rect(100px, 350px, 15px, 0); }
+}
+
+/* Animaciones de Flash para eventos */
+@keyframes flash-green { from { background-color: rgba(0, 255, 136, 0.1); } to { background-color: rgba(0, 0, 0, 0.5); } }
+@keyframes flash-cyan { from { background-color: rgba(0, 255, 255, 0.1); } to { background-color: rgba(0, 0, 0, 0.5); } }
+@keyframes flash-magenta { from { background-color: rgba(255, 0, 255, 0.1); } to { background-color: rgba(0, 0, 0, 0.5); } }
+@keyframes flash-yellow { from { background-color: rgba(255, 255, 0, 0.1); } to { background-color: rgba(0, 0, 0, 0.5); } }
+@keyframes flash-red { from { background-color: rgba(255, 0, 68, 0.15); } to { background-color: rgba(0, 0, 0, 0.5); } }
+
+.flash-green { animation: flash-green 1s ease-out; }
+.flash-cyan { animation: flash-cyan 1s ease-out; }
+.flash-magenta { animation: flash-magenta 1s ease-out; }
+.flash-yellow { animation: flash-yellow 1s ease-out; }
+.flash-red { animation: flash-red 1s ease-out; }
+
+
+/* Scrollbar estilizada */
+.custom-hud-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-hud-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.custom-hud-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.custom-hud-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.5);
+}
